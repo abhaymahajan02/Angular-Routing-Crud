@@ -1,0 +1,167 @@
+<!--1.4 cars management-->
+
+ 
+<!-- <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center">
+        <i class= "fa fa-credit-card"></i>
+        Billing Management
+      </h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <div class="form-group user11">
+        <label> Payment Amount:</label>
+        <input type="text" class ="form-control i1" placeholder = "Enter Amount" [(ngModel)] = "paymentamount">
+      </div>
+      <div class="form-group user11">
+        <label>  Payment Method:</label>
+        <input type="text" class ="form-control i1" placeholder = "Enter  Payment Method" [(ngModel)] = "paymentmethod">
+      </div>
+      <button *ngIf= "isSubSuccess == false" class="btn btn-primary btn-block" (click)="biSubmit()" [disabled]= "paymentamount == '' || paymentmethod == ''">
+        <i class= "fa fa-sign-in"></i>
+        Submit
+      </button>
+      <div class="alert alert-success" *ngIf= "isLogsSuccess">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div> 
+      <button *ngIf= "isSubSuccess == true" class="btn btn-warning btn-block" (click)="biUpdate()">
+        Update
+      </button>
+    </div>
+    <div class="col-lg-8">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Payment Amount</th>
+            <th>Payment Method</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor= "let item of paymentList; let ibial = index">
+            <td>{{ item.paymentamount }}</td>
+            <td>{{ item.paymentmethod }}</td>
+            <td>
+              <button class= "btn btn-outline-warning" (click)="bEdit(ibial,item)">
+                <i class="fa fa-edit"></i>
+                Edit
+              </button>
+              <button class= "btn btn-outline-danger btn-del" (click)="bDelete(ibial)">
+                <i class="fa fa-trash"></i>
+                Delete
+              </button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+
+  <!--1.4 cars management end-->
+
+
+
+
+
+
+
+
+
+
+
+  <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center">
+        <i class= "fa fa-credit-card"></i>
+        Billing Management
+      </h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <form [formGroup]= "billForm">
+      <div class="form-group user11">
+        <label> Payment Amount:</label>
+        <input type="text" class ="form-control i1" placeholder = "Enter Amount" formControlName = "paymentamount"
+         [ngClass]="{'is-invalid':submit && f['paymentamount'].errors}">
+
+        <div *ngIf="submit && f['paymentamount'].errors" class="invalid-feedback">
+
+          <div *ngIf="f['paymentamount'].errors['required']">
+          Payment Amount is required...!
+        </div>
+        <div *ngIf="f['paymentamount'].errors['minlength']">
+          minimum 5 numbers are required...!
+        </div>
+        <div *ngIf="f['paymentamount'].errors['maxlength']">
+          maximum 7 numbers are required...!
+        </div>
+        </div>
+      
+      </div>
+
+      <div class="form-group user11">
+        <label>  Payment Method:</label>
+        <input type="text" class ="form-control i1" placeholder = "Enter  Payment Method" formControlName = "paymentmethod"
+        [ngClass]="{'is-invalid':submit && f['paymentmethod'].errors}">
+
+        <div *ngIf="submit && f['paymentmethod'].errors" class="invalid-feedback">
+          <div *ngIf="f['paymentmethod'].errors['required']">
+            Payment Method is required...!
+          </div>
+          <div *ngIf="f['paymentmethod'].errors['minlength']">
+            Minimum 3 letters are required...!
+          </div>
+          <div *ngIf="f['paymentmethod'].errors['maxlength']">
+            Maximum 5 letters are required...!
+          </div>
+        </div>
+
+      </div>
+      <button *ngIf="iseditoperation == false" type="submit" class="btn btn-outline-primary btn-block" (click)="bSubmit()" >
+        <i class= "fa fa-sign-in"></i>
+        Submit
+      </button>
+      <button *ngIf="iseditoperation == true" type="update" class="btn btn-outline-warning btn-block" (click)="billUpdate()">
+        Update
+      </button>
+    </form>
+    </div>
+    <div class="col-lg-8">
+      <div class="col-lg-12">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)] = "searchbox">
+      </div>
+      <div class="col-lg-12 table-responsive" style="height: 20rem;">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th>Payment Amount</th>
+              <th>Payment Method</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+            <tr  *ngFor= "let items of billList | filter:searchbox;let ibill=index">
+              <td>{{items.paymentamount}}</td>
+              <td>{{items.paymentmethod}}</td>
+              <td>
+                <button type="edit" class="btn btn-outline-warning" (click)="editButton(items)">
+                  <i class="fa fa-edit"></i>
+                  Edit
+                </button>
+                <button type="delete" class="btn btn-outline-danger btn-del" (click)="deleteButton(items.id)">
+                  <i class="fa fa-trash"></i>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>

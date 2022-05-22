@@ -1,0 +1,161 @@
+<!--1.1 cars management-->
+  
+  
+  
+ <!-- <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center"> 
+       <i class="fa fa-car"></i>
+        Cars Management System
+      </h3>
+     </div>
+     <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <div class="form-group user11">
+        <label> Car Model:</label>
+        <input type="text" class = "form-control i1" placeholder = "Enter car model" [(ngModel)] = "carmodels">
+      </div>
+      <div class="form-group user11">
+        <label> Car color:</label>
+        <input type="text" class = "form-control i1" placeholder = "Enter car color" [(ngModel)] = "carcolor">
+      </div>
+      <button *ngIf= "isEditOperation == false" class="btn btn-primary btn-block" (click)="cSubmit()" [disabled]= "carmodels == '' || carcolor == ''">
+        <i class="fa fa-sign-in"></i>
+        Submit
+      </button>
+       <div class="alert alert-success" *ngIf= "isLogitSuccess">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div> 
+      <button *ngIf= "isEditOperation == true" class="btn btn-warning btn-block" (click)="cUpdate()">
+        
+        Update
+      </button>
+    </div>
+    <div class="col-lg-8">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Car Model </th>
+            <th>Car Color</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor= "let item of carList; let icar = index;">
+            <td>{{ item.carmodels }}</td>
+            <td>{{ item.carcolor }}</td>
+            <td>
+              <button class="btn btn-outline-warning" (click)="cEdit(icar,item)">
+                <i class="fa fa-edit"></i>
+                Edit
+              </button>
+              <button class="btn btn-outline-danger btn-del" (click)="cDelete(icar)">
+                <i class="fa fa-trash"></i>
+                Delete
+              </button>
+            </td>
+          </tr>
+         
+        </tbody>
+      </table>
+    </div>
+  </div>   -->
+  <!--1.1 car management end-->
+
+
+  <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center"> 
+       <i class="fa fa-car"></i>
+        Cars Management System
+      </h3>
+     </div>
+     <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <form [formGroup]= "carForm">
+      <div class="form-group user11">
+        <label> Car Model:</label>
+        <input type="text" class = "form-control i1" placeholder = "Enter car model" formControlName = "carmodels"
+        [ngClass]="{'is-invalid':submitted && f['carmodels'].errors}">
+
+        <div *ngIf="submitted && f['carmodels'].errors" class="invalid-feedback">
+          <div *ngIf="f['carmodels'].errors['required']">
+            Car models is required...!
+          </div>
+          <div *ngIf="f['carmodels'].errors['minlength']">
+            Minimum 3 letters is required...!
+          </div>
+          <div *ngIf="f['carmodels'].errors['maxlength']">
+            maximum 9 letters is required...!
+          </div>
+        </div>
+      
+      </div>
+      <div class="form-group user11">
+        <label> Car color:</label>
+        <input type="text" class = "form-control i1" placeholder = "Enter car color" formControlName = "carcolor"
+        [ngClass]="{'is-invalid':submitted && f['carcolor'].errors}">
+
+        <div *ngIf="submitted && f['carcolor'].errors" class="invalid-feedback">
+          <div *ngIf="f['carcolor'].errors['required']">
+            Car color is required...!
+          </div>
+          <div *ngIf="f['carcolor'].errors['minlength']">
+            Minimum 3 letters is required...!
+          </div>
+          <div *ngIf="f['carcolor'].errors['maxlength']">
+           maximum 13 letters is required...!
+          </div>
+        </div>
+      
+      
+      </div>
+      <button *ngIf="issubmitoperation == false" type="submit"  class="btn btn-outline-primary btn-block" (click)="abrSubmit()" >
+        <i class="fa fa-sign-in"></i>
+        Submit
+      </button>
+       <button *ngIf="issubmitoperation == true" type="update" class="btn btn-outline-warning btn-block" (click)="carUpdate()">
+         update
+       </button>
+    </form>
+      
+    </div>
+    <div class="col-lg-8">
+      <div class="col-lg-12">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)] = "searchedbox">
+      </div>
+      <div class="col-lg-12 table-responsive" style="height: 20rem;">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th>Car Model </th>
+            <th>Car Color</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor= "let item of carsList|filter:searchedbox; let icar = index;">
+            <td>{{ item.carmodels }}</td>
+            <td>{{ item.carcolor }}</td>
+            <td>
+              <button class="btn btn-outline-warning" (click)="carEdit(item)">
+                <i class="fa fa-edit"></i>
+                Edit
+              </button>
+              <button class="btn btn-outline-danger btn-del" (click)="carDelete(item.id)">
+                <i class="fa fa-trash"></i>
+                Delete
+              </button>
+            </td>
+          </tr> 
+         
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div> 
+
+
+  

@@ -1,0 +1,100 @@
+<!-- <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center"> 
+        <i class="fa fa-user"></i>
+        Log In</h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <div class="form-group user11">
+        <label> Customer Id:</label>
+        <input type="text" class = "form-control i1" placeholder = " Enter customer id" [(ngModel)] = "customerid">
+      </div>
+      <div class="form-group user11">
+        <label> Car Model:</label>
+        <input type="text" class = "form-control i1" placeholder = " Enter Car Model" [(ngModel)] = "carmodel">
+      </div>
+      <button class="btn btn-primary btn-block" (click)="login()" [disabled]= "customerid == '' || carmodel == ''">
+        <i class="fa fa-sign-in"></i> 
+        Log In
+      </button>
+      <div class="alert alert-success" *ngIf= "isLoginSuccess">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div>
+    </div>
+    <div class="col-lg-2"></div>
+  </div> -->
+
+
+
+
+
+
+
+
+
+
+
+  <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center"> 
+        <i class="fa fa-user"></i>
+        Log In</h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <form [formGroup]= "loginForm">
+      <div class="form-group user11">
+        <label> Customer Id:</label>
+        <input type="text" class = "form-control i1" placeholder = " Enter customer id" formControlName = "customersid"
+         [ngClass]="{'is-invalid': ssubmitted  &&  f['customersid'].errors}">
+
+        <div *ngIf ="ssubmitted  &&  f['customersid'].errors" class="invalid-feedback" >
+          
+          <div *ngIf="f['customersid'].errors['required']">
+          Customers id is required ...!
+        </div>
+        <div *ngIf="f['customersid'].errors['minlength']">
+          Please enter minimum 5 letters...!
+        </div>
+        <div *ngIf="f['customersid'].errors['maxlength']">
+          Please enter maximum 10 letters...!
+        </div>
+
+        </div>
+
+        
+
+
+
+      </div>
+      <div class="form-group user11">
+        <label> Car Model:</label>
+        <input type="text" class = "form-control i1" placeholder = " Enter Car Model" formControlName = "carsmodel"
+        [ngClass]="{'is-invalid': ssubmitted  &&  f['carsmodel'].errors}">
+      
+        <div *ngIf ="ssubmitted  &&  f['carsmodel'].errors" class="invalid-feedback" >
+          <div *ngIf="f['carsmodel'].errors['required']">
+          Car Models is Required ...!
+        </div>
+        <div *ngIf="f['carsmodel'].errors['minlength']">
+          Please enter minimum 5 letters...!
+        </div>
+        <div *ngIf="f['carsmodel'].errors['maxlength']">
+          Please enter maximum 10 letters...!
+        </div>
+      </div>
+      </div>
+      <button type="submit" class="btn btn-outline-primary btn-block" (click)="logins()" >
+        <i class="fa fa-sign-in"></i> 
+        Log In
+      </button>
+      
+    </form>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>

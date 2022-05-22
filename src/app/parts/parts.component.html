@@ -1,0 +1,163 @@
+<!--1.2 cars management-->
+   
+<!-- <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center">
+        <i class= "fa fa-cogs"></i>
+        Parts Management
+      </h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <div class="form-group user11">
+        <label > Part's Name:</label>
+        <input type="text" class="form-control i1" placeholder="Enter part name" [(ngModel)] =  "partsname" >
+      </div>
+      <div class="form-group user11">
+        <label >Part's Id:</label>
+        <input type="text" class="form-control i1" placeholder="Enter part id" [(ngModel)] =  "partsid">
+      </div>
+      <button *ngIf= "iSubmitSuccess == false " class="btn btn-primary btn-block" (click)="pSubmit()" [disabled]= "partsname == '' || partsid == ''">
+        <i class="fa fa-sign-in"></i>
+        Submit
+      </button>
+       <div class="alert alert-success" *ngIf= "isLogsubSuccess">
+        <strong>Success!</strong> Indicates a successful or positive action.
+      </div> 
+      <button *ngIf= "iSubmitSuccess == true " class="btn btn-warning btn-block" (click)="pUpdate()">
+        Update
+      </button>
+    </div>
+    <div class="col-lg-8">
+      <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Part's Name</th>
+        <th>Part's Id</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor= "let item of partsList; let ipart = index;">
+        <td>{{ item.partsname }}</td>
+        <td>{{ item.partsid }}</td>
+        <td>
+          <button class="btn btn-outline-warning" (click)= "pEdit(ipart,item)">
+           <i class="fa fa-edit"></i>
+            Edit
+          </button>
+          <button class="btn btn-outline-danger btn-del" (click)="pDelete(ipart)">
+           <i class="fa fa-trash"></i>
+            Delete
+          </button>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+    </div>
+  </div>  -->
+
+  <!--1.2 cars management end-->
+
+
+
+
+
+
+
+  <div class="row row1">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 column2">
+      <h3 class="text-center">
+        <i class= "fa fa-cogs"></i>
+        Parts Management
+      </h3>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4">
+      <form [formGroup]= "partsForm">
+      <div class="form-group user11">
+        <label > Part's Name:</label>
+        <input type="text" class="form-control i1" placeholder="Enter part name" formControlName =  "partsname" 
+        [ngClass]="{'is-invalid':Submitdd && f['partsname'].errors}">  
+
+        <div *ngIf="Submitdd && f['partsname'].errors" class="invalid-feedback">
+          <div *ngIf="f['partsname'].errors['required']"> 
+            Parts name is required...!
+          </div>
+          <div *ngIf="f['partsname'].errors['minlength']">
+            minimum 4 letters is required...!
+          </div>
+          <div *ngIf="f['partsname'].errors['maxlength']">
+            maximum 9 letters is required...!
+          </div>
+        </div>
+      
+      
+      </div>
+      <div class="form-group user11">
+        <label >Part's Id:</label>
+        <input type="text" class="form-control i1" placeholder="Enter part id" formControlName =  "partsid"
+        [ngClass]="{'is-invalid':Submitdd && f['partsid'].errors}">
+
+        <div *ngIf="Submitdd && f['partsid'].errors" class="invalid-feedback">
+          <div *ngIf="f['partsid'].errors['required']"> 
+            Parts Id is required...!
+          </div>
+          <div *ngIf="f['partsid'].errors['minlength']">
+            minimum 4 letters is required...!
+          </div>
+          <div *ngIf="f['partsid'].errors['maxlength']">
+            maximum 5 letters is required...!
+          </div>
+        </div>
+
+
+      </div>
+      <button *ngIf="ispartoperation == false" type="submit" class="btn btn-outline-primary btn-block" (click)="pbSubmit()" >
+        <i class="fa fa-sign-in"></i>
+        Submit
+      </button>
+      <button *ngIf="ispartoperation == true" type="update" class="btn btn-outline-warning btn-block" (click)="partsUpdate()">
+        Update
+      </button>
+    </form>
+      
+    </div>
+    <div class="col-lg-8">
+      <div class="col-lg-12">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)] ="term">
+      </div>
+      <div class="col-lg-12 table-responsive" style="height: 300px;">
+        <table class="table table-dark ">
+          <thead>
+            <tr>
+              <th>Part's Name</th>
+              <th>Part's Id</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr *ngFor= "let item of partList |filter:term; let iparts = index;">
+              <td>{{ item.partsname }}</td>
+              <td>{{ item.partsid }}</td>
+              <td>
+                <button class="btn btn-outline-warning" (click)= "partEdit(item)">
+                 <i class="fa fa-edit"></i>
+                  Edit
+                </button>
+                <button class="btn btn-outline-danger btn-del" (click)= "partDelete(item.id)">
+                 <i class="fa fa-trash"></i>
+                  Delete
+                </button>
+              </td>
+            </tr> 
+           
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div> 
